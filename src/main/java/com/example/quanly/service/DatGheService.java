@@ -1,6 +1,6 @@
 package com.example.quanly.service;
 
-import com.example.quanly.dto.GheResponse;
+import com.example.quanly.dto.GheDTO.GheResponse;
 import com.example.quanly.dto.PhienResponse;
 import com.example.quanly.exception.BadRequestException;
 import com.example.quanly.model.*;

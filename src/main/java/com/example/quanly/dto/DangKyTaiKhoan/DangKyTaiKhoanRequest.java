@@ -1,4 +1,4 @@
-package com.example.quanly.dto;
+package com.example.quanly.dto.DangKyTaiKhoan;
 
 import jakarta.validation.constraints.*;
 

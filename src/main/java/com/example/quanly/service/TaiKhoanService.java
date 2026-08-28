@@ -1,7 +1,7 @@
 package com.example.quanly.service;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.example.quanly.dto.DangKyTaiKhoanResponse;
+import com.example.quanly.dto.DangKyTaiKhoan.DangKyTaiKhoanResponse;
 import com.example.quanly.exception.BadRequestException;
 import com.example.quanly.model.User;
 import com.example.quanly.repository.UserRepository;

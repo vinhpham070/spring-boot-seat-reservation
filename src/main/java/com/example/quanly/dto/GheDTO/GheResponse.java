@@ -1,4 +1,4 @@
-package com.example.quanly.dto;
+package com.example.quanly.dto.GheDTO;
 
 import com.example.quanly.model.TrangThai;
 

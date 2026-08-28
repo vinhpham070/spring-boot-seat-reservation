@@ -1,4 +1,4 @@
-package com.example.quanly.dto;
+package com.example.quanly.dto.GheDTO;
 
 import jakarta.validation.constraints.NotNull;
 

@@ -1,4 +1,4 @@
-package com.example.quanly.dto;
+package com.example.quanly.dto.DangKyTaiKhoan;
 
 public class DangKyTaiKhoanResponse {
     private String username;

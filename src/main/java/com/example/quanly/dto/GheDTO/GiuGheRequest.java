@@ -1,4 +1,4 @@
-package com.example.quanly.dto;
+package com.example.quanly.dto.GheDTO;
 
 
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +7,7 @@ public class GiuGheRequest {
     @NotNull(message = "ID người dùng không được để trống")
     private Long userId;
 
-    @NotNull(message =  = "ID ghế ngồi không được để trống")
+    @NotNull(message = "ID ghế ngồi không được để trống")
     private Long gheNgoiId;
 
     public GiuGheRequest() {}

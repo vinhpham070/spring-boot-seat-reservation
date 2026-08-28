@@ -1,9 +1,9 @@
 package com.example.quanly.controller;
 
-import com.example.quanly.dto.GheResponse;
-import com.example.quanly.dto.GiuGheRequest;
+import com.example.quanly.dto.GheDTO.GheResponse;
+import com.example.quanly.dto.GheDTO.GiuGheRequest;
 import com.example.quanly.dto.PhienResponse;
-import com.example.quanly.dto.XacNhanVaHuyRequest;
+import com.example.quanly.dto.GheDTO.XacNhanVaHuyRequest;
 import com.example.quanly.service.DatGheService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
