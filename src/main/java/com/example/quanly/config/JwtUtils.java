@@ -1,4 +1,5 @@
 package com.example.quanly.config;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.security.Key;
@@ -20,6 +21,7 @@ public class JwtUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRED_TIME))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
+
     }
     public String extractUsername(String token) {
         return Jwts.parserBuilder()
