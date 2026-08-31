@@ -6,6 +6,7 @@ import com.example.quanly.model.User;
 import com.example.quanly.repository.GheNgoiRepository;
 import com.example.quanly.repository.PhongRepository;
 import com.example.quanly.repository.UserRepository;
+import com.example.quanly.service.TaiKhoanService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,18 +19,19 @@ public class DataLoader {
     @Bean
     CommandLineRunner initData(UserRepository userRepository,
                                PhongRepository phongRepository,
-                               GheNgoiRepository gheNgoiRepository) {
+                               GheNgoiRepository gheNgoiRepository,
+                               TaiKhoanService taiKhoanService) {
         return args -> {
             System.out.println("====== BẮT ĐẦU NẠP DỮ LIỆU MỒI (H2) ======");
 
             // Chỉ nạp khi DB trống để tránh trùng lặp
             if (userRepository.count() == 0) {
                 // 1. Tạo 5 User
-                User u1 = userRepository.save(new User("Nguyen Van A", "a@example.com", "123456789"));
-                User u2 = userRepository.save(new User("Tran Van B", "b@example.com", "123456789"));
-                User u3 = userRepository.save(new User("Le Thi C", "c@example.com", "123456789"));
-                User u4 = userRepository.save(new User("Pham Van D", "d@example.com", "123456789"));
-                User u5 = userRepository.save(new User("Vo Thi E", "e@example.com", "123456789"));
+                taiKhoanService.dangKyTaiKhoan("NguyenVanA", "a@example.com", "123456789");
+                taiKhoanService.dangKyTaiKhoan("TranVanB", "b@example.com", "123456789");
+                taiKhoanService.dangKyTaiKhoan("LeThiC", "c@example.com", "123456789");
+                taiKhoanService.dangKyTaiKhoan("PhamVanD", "d@example.com", "123456789");
+                taiKhoanService.dangKyTaiKhoan("VoThiE", "e@example.com", "123456789");
                 System.out.println(">> Đã tạo 5 User.");
 
                 // 2. Tạo 1 Phòng (Lấy User 1 làm chủ phòng)
@@ -37,7 +39,7 @@ public class DataLoader {
                 phong.setTenPhong("Phòng VIP 1");
                 phong.setSoHang(1);
                 phong.setSoCot(5);
-                phong.setChuPhong(u1);
+                phong.setChuPhong(userRepository.findByUsername("NguyenVanA").get());
                 Phong savedPhong = phongRepository.save(phong);
                 System.out.println(">> Đã tạo Phòng ID: " + savedPhong.getId());
 

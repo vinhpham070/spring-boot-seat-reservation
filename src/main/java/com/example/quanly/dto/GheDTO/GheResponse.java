@@ -8,16 +8,18 @@ public class GheResponse {
     private Long hang;
     private Long cot;
     private TrangThai trangThai;
+    private Long phienId;
 
     public GheResponse() {
     }
 
-    public GheResponse(Long gheId, String soGhe, Long hang, Long cot, TrangThai trangThai) {
+    public GheResponse(Long gheId, String soGhe, Long hang, Long cot, TrangThai trangThai, Long phienId) {
         this.gheId = gheId;
         this.soGhe = soGhe;
         this.hang = hang;
         this.cot = cot;
         this.trangThai = trangThai;
+        this.phienId = phienId;
     }
 
     // GETTER ----------------------------------------------
@@ -42,6 +44,8 @@ public class GheResponse {
         return trangThai;
     }
 
+    public Long getPhienId() { return phienId; }
+
     // SETTER ----------------------------------------------
 
 
@@ -60,4 +64,6 @@ public class GheResponse {
     public void setTrangThai(TrangThai trangThai) {
         this.trangThai = trangThai;
     }
+
+    public void setPhienId(Long phienId) { this.phienId = phienId;};
 }

@@ -31,8 +31,8 @@ public class DatGheService {
     }
 
     @Transactional
-    public PhienResponse giuGhe(Long userId, Long gheNgoiId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User không tồn tại!"));
+    public PhienResponse giuGhe(String username, Long gheNgoiId) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BadRequestException("User không tồn tại!"));
         GheNgoi gheNgoi = gheNgoiRepository.findById(gheNgoiId).orElseThrow(() -> new BadRequestException("Ghế ngồi không tồn tại!"));
 
         LocalDateTime now = LocalDateTime.now();
@@ -48,8 +48,8 @@ public class DatGheService {
     }
 
     @Transactional
-    public PhienResponse xacNhanDatGhe(Long phienDatGheId, Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User không tồn tại!"));
+    public PhienResponse xacNhanDatGhe(Long phienDatGheId, String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BadRequestException("User không tồn tại!"));
         PhienDatGhe phienDatGhe = phienDatGheRepository
                 .findById(phienDatGheId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy phiên của người dùng!"));
@@ -65,8 +65,8 @@ public class DatGheService {
     }
 
     @Transactional
-    public PhienResponse huyGiuGhe(Long phienDatGheId, Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User không tồn tại!"));
+    public PhienResponse huyGiuGhe(Long phienDatGheId, String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BadRequestException("User không tồn tại!"));
         PhienDatGhe phienDatGhe = phienDatGheRepository
                 .findById(phienDatGheId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy phiên của người dùng!"));
@@ -80,15 +80,20 @@ public class DatGheService {
         throw new BadRequestException("Đã có lỗi xảy ra vui lòng thử lại!");
     }
 
-    public List<GheResponse> laySoDoGheTheoPhong(Long phongId, Long userId) {
+    public List<GheResponse> laySoDoGheTheoPhong(Long phongId, String username) {
         Phong phong = phongRepository.findById(phongId).orElseThrow(() -> new BadRequestException("Phòng không tồn tại!"));
-
+        Long userId = null;
+        if (username != null) {
+            User user = userRepository.findByUsername(username).orElseThrow(() -> new BadRequestException("Lỗi tìm user!"));
+            userId = user.getId();
+        }
         List<GheNgoi> danhSachGhe = phong.getDanhSachGhe();
         List<GheResponse> ketQua = new ArrayList<>();
         LocalDateTime now = LocalDateTime.now();
 
         for (GheNgoi gheNgoi : danhSachGhe) {
             TrangThai trangThai = TrangThai.TRONG;
+            Long phienId = null;
 
             Optional<PhienDatGhe> phienDaDat = phienDatGheRepository.findFirstByGheNgoiAndTrangThai(gheNgoi, TrangThai.DA_DAT);
 
@@ -104,13 +109,14 @@ public class DatGheService {
                 if (phienGiu.isPresent()) {
                     if (userId != null && phienGiu.get().getUser().getId().equals(userId)) {
                         trangThai = TrangThai.PHIEN_CUA_TOI;
+                        phienId = phienGiu.get().getId();
                     } else {
                         trangThai = TrangThai.DANG_GIU;
                     }
                 }
             }
 
-            GheResponse duLieuGhe = new GheResponse(gheNgoi.getId(), gheNgoi.getSoGhe(), gheNgoi.getHang(), gheNgoi.getCot(), trangThai);
+            GheResponse duLieuGhe = new GheResponse(gheNgoi.getId(), gheNgoi.getSoGhe(), gheNgoi.getHang(), gheNgoi.getCot(), trangThai, phienId);
             ketQua.add(duLieuGhe);
         }
         return ketQua;

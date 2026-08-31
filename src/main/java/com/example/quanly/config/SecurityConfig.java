@@ -42,6 +42,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/tai-khoan/tao-tai-khoan").permitAll()
                         .requestMatchers("/api/dat-ghe/so-do/**").permitAll()
                         .requestMatchers("/error").permitAll()
+                        .requestMatchers("/api/tai-khoan/dang-nhap").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

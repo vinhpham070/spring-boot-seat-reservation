@@ -24,7 +24,6 @@ public class TaiKhoanService {
         userRepository.save(user);
         DangKyTaiKhoanResponse dangKyTaiKhoanResponse = new DangKyTaiKhoanResponse(username, email);
         return dangKyTaiKhoanResponse;
-
     }
 
 }
