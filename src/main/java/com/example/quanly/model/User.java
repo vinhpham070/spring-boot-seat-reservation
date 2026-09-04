@@ -49,6 +49,8 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }
+
+    public List<Phong> getDanhSachPhong() { return danhSachPhong; }
     // SETTER ----------------------------------------------
 
     public void setUsername(String name) {
@@ -62,4 +64,6 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setDanhSachPhong(List<Phong> danhSachPhong) { this.danhSachPhong = danhSachPhong; };
 }

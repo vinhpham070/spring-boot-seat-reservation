@@ -1,4 +1,6 @@
 package com.example.quanly.service;
+import com.example.quanly.model.PhienDatGhe;
+import com.example.quanly.repository.PhienDatGheRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.quanly.dto.DangKyTaiKhoan.DangKyTaiKhoanResponse;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class TaiKhoanService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
 
     public TaiKhoanService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;

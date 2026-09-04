@@ -4,10 +4,14 @@ import com.example.quanly.dto.GheDTO.GheResponse;
 import com.example.quanly.dto.GheDTO.GiuGheRequest;
 import com.example.quanly.dto.PhienResponse;
 import com.example.quanly.dto.GheDTO.XacNhanVaHuyRequest;
+import com.example.quanly.dto.PhongDTO.SoDoPhongResponse;
 import com.example.quanly.model.User;
+import com.example.quanly.repository.PhongRepository;
 import com.example.quanly.repository.UserRepository;
 import com.example.quanly.service.DatGheService;
+import com.example.quanly.service.PhongService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +25,15 @@ public class DatGheController {
 
     private final DatGheService datGheService;
     private final UserRepository userRepository;
+    private final PhongRepository phongRepository;
+    private final PhongService phongService;
 
 
-    public DatGheController(DatGheService datGheService, UserRepository userRepository) {
+    public DatGheController(DatGheService datGheService, UserRepository userRepository, PhongRepository phongRepository, PhongService phongService) {
         this.datGheService = datGheService;
         this.userRepository = userRepository;
+        this.phongRepository = phongRepository;
+        this.phongService = phongService;
     }
 
     @PostMapping("/giu-ghe")
@@ -42,6 +50,13 @@ public class DatGheController {
         return ResponseEntity.ok(xacNhanPhien);
     }
 
+    @PostMapping("/huy-ghe/{phienId}")
+    public ResponseEntity<PhienResponse> huyGhe(@PathVariable Long phienId, Principal principal) {
+        String username = principal.getName();
+        PhienResponse huyGhe = datGheService.huyGhe(phienId, username);
+        return ResponseEntity.ok(huyGhe);
+    }
+
     @PostMapping("/huy-giu-ghe/{phienId}")
     public ResponseEntity<PhienResponse> huyGiuGhe(@PathVariable Long phienId, Principal principal) {
         String username = principal.getName();
@@ -49,12 +64,6 @@ public class DatGheController {
         return ResponseEntity.ok(huyPhien);
     }
 
-    @GetMapping("/so-do/{phongId}")
-    public ResponseEntity<List<GheResponse>> laySoDo(@PathVariable Long phongId, Principal principal) {
-        String username = principal.getName();
-        List<GheResponse> soDo = datGheService.laySoDoGheTheoPhong(phongId, username);
-        return ResponseEntity.ok(soDo);
-    }
 
 
 

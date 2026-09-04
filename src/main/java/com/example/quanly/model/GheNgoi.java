@@ -2,6 +2,7 @@ package com.example.quanly.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -18,17 +19,24 @@ public class GheNgoi {
     private Long hang;
     private Long cot;
 
+    @Version
+    private Long version;
+
     @ManyToOne
     @JoinColumn(name = "phong_id")
     private Phong phong;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String usernameNguoiDat;
+
 
     public GheNgoi() {};
 
-    public GheNgoi(String soGhe, Long hang, Long cot) {
+    public GheNgoi(String soGhe, Long hang, Long cot, Phong phong) {
         this.soGhe = soGhe;
         this.hang = hang;
         this.cot = cot;
+        this.phong = phong;
 
 
     }

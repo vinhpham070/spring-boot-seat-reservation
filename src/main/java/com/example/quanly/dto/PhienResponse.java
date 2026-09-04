@@ -12,6 +12,7 @@ public class PhienResponse {
     private TrangThai trangThai;
     private LocalDateTime thoiGianHetHan;
     private Long phienId;
+    private String ghiChu;
 
     public PhienResponse() {
     }
@@ -25,6 +26,7 @@ public class PhienResponse {
         this.thoiGianHetHan = thoiGianHetHan;
         this.phienId = phienId;
     }
+
 
     public Long getUserId() {
         return userId;
@@ -52,5 +54,42 @@ public class PhienResponse {
 
     public Long getPhienId() {
         return phienId;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setGheNgoiId(Long gheNgoiId) {
+        this.gheNgoiId = gheNgoiId;
+    }
+
+    public void setSoGhe(String soGhe) {
+        this.soGhe = soGhe;
+    }
+
+    public void setTrangThai(TrangThai trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public void setThoiGianHetHan(LocalDateTime thoiGianHetHan) {
+        this.thoiGianHetHan = thoiGianHetHan;
+    }
+
+    public void setPhienId(Long phienId) {
+        this.phienId = phienId;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
     }
 }

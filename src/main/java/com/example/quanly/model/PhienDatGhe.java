@@ -19,6 +19,11 @@ public class PhienDatGhe {
     @Enumerated(EnumType.STRING)
     private TrangThai trangThai;
 
+    @Version
+    private Long version;
+
+    private String ghiChu;
+
     private LocalDateTime thoiGianHetHan;
 
     public PhienDatGhe() {};
@@ -51,6 +56,15 @@ public class PhienDatGhe {
     public LocalDateTime getThoiGianHetHan() {
         return thoiGianHetHan;
     }
+
+    public String getTenNguoiDat() {
+        if (user != null) {
+            return user.getUsername();
+        }
+        return ghiChu;
+    }
+
+    public String getGhiChu() { return ghiChu; }
     // SETTER ----------------------------------------------
 
     public void setGheNgoi(GheNgoi gheNgoi) {
@@ -68,4 +82,6 @@ public class PhienDatGhe {
     public void setThoiGianHetHan(LocalDateTime thoiGianHetHan) {
         this.thoiGianHetHan = thoiGianHetHan;
     }
+
+    public void setGhiChu(String ghiChu) { this.ghiChu = ghiChu; };
 }

@@ -10,19 +10,16 @@ public class Phong {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tenPhong;
-    private int soCot;
-    private int soHang;
+    private Long soCot;
+    private Long soHang;
     @OneToMany(mappedBy = "phong")
     private List<GheNgoi> danhSachGhe;
-    @ManyToOne
-    @JoinColumn(name = "chu_phong_id")
-    private User chuPhong;
+
 
     public Phong() {
     }
 
-    public Phong(Long id, String tenPhong, int soCot, int soHang, List<GheNgoi> danhSachGhe) {
-        this.id = id;
+    public Phong(String tenPhong, Long soCot, Long soHang, List<GheNgoi> danhSachGhe) {
         this.tenPhong = tenPhong;
         this.soCot = soCot;
         this.soHang = soHang;
@@ -37,13 +34,14 @@ public class Phong {
         return tenPhong;
     }
 
-    public int getSoCot() {
+    public Long getSoCot() {
         return soCot;
     }
 
-    public int getSoHang() {
+    public Long getSoHang() {
         return soHang;
     }
+
 
     public List<GheNgoi> getDanhSachGhe() {
         return danhSachGhe;
@@ -55,11 +53,11 @@ public class Phong {
         this.tenPhong = tenPhong;
     }
 
-    public void setSoCot(int soCot) {
+    public void setSoCot(Long soCot) {
         this.soCot = soCot;
     }
 
-    public void setSoHang(int soHang) {
+    public void setSoHang(Long soHang) {
         this.soHang = soHang;
     }
 
@@ -67,5 +65,5 @@ public class Phong {
         this.danhSachGhe = danhSachGhe;
     }
 
-    public void setChuPhong(User user) { this.chuPhong = user; }
+
 }

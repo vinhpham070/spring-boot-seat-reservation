@@ -1,6 +1,7 @@
 package com.example.quanly.dto.GheDTO;
 
 import com.example.quanly.model.TrangThai;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class GheResponse {
     private Long gheId;
@@ -8,7 +9,11 @@ public class GheResponse {
     private Long hang;
     private Long cot;
     private TrangThai trangThai;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long phienId;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String tenNguoiDat;
 
     public GheResponse() {
     }
@@ -46,6 +51,8 @@ public class GheResponse {
 
     public Long getPhienId() { return phienId; }
 
+    public String getTenNguoiDat() { return tenNguoiDat; }
+
     // SETTER ----------------------------------------------
 
 
@@ -66,4 +73,6 @@ public class GheResponse {
     }
 
     public void setPhienId(Long phienId) { this.phienId = phienId;};
+
+    public void setTenNguoiDat(String tenNguoiDat) { this.tenNguoiDat = tenNguoiDat; };
 }
