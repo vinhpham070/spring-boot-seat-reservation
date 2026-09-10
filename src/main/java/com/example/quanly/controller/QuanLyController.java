@@ -17,6 +17,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/quan-ly")
+@CrossOrigin(origins = "*")
 public class QuanLyController {
 
     private final DatGheService datGheService;

@@ -37,7 +37,7 @@ public class DataLoader {
                 System.out.println(">> Đã tạo 5 User.");
 
                 // 2. Tạo 1 Phòng (Lấy User 1 làm chủ phòng)
-                phongService.taoPhong("Mahattan meeting", 5L, 1L, "NguyenVanA" );
+                phongService.taoPhong("Mahattan meeting", 5L, 2L, "NguyenVanA" );
 
                 // 3. Tạo 5 Ghế và gán vào Phòng vừa tạo
 

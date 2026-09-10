@@ -19,8 +19,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "chuPhong")
-    List<Phong> danhSachPhong;
+
 
     public User() {};
 
@@ -50,7 +49,7 @@ public class User implements UserDetails {
         return password;
     }
 
-    public List<Phong> getDanhSachPhong() { return danhSachPhong; }
+
     // SETTER ----------------------------------------------
 
     public void setUsername(String name) {
@@ -65,5 +64,5 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setDanhSachPhong(List<Phong> danhSachPhong) { this.danhSachPhong = danhSachPhong; };
+
 }

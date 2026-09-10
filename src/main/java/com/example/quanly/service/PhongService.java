@@ -122,7 +122,8 @@ public class PhongService {
 
         List<PhongThongKeResponse> danhSachPhongThongKe = new ArrayList<>();
 
-        for (Phong phong : user.getDanhSachPhong()) {
+        for (ThanhVienPhong quyenCuaUser : thanhVienPhongRepository.findAllByUserAndVaiTro(user, VaiTro.OWNER)) {
+            Phong phong = quyenCuaUser.getPhong();
             LocalDateTime now = LocalDateTime.now();
             Long soLuongGheDaDat = phienDatGheRepository.countByGheNgoi_PhongAndTrangThai(phong, TrangThai.DA_DAT);
             Long soLuongGheDangGiu = phienDatGheRepository.countByGheNgoi_PhongAndTrangThaiAndThoiGianHetHanAfter(phong, TrangThai.DANG_GIU, now);

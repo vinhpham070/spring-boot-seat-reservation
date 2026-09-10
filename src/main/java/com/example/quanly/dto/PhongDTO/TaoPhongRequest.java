@@ -1,5 +1,6 @@
 package com.example.quanly.dto.PhongDTO;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NegativeOrZero;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -8,8 +9,10 @@ public class TaoPhongRequest {
     @NotBlank(message = "Tên phòng không được để trống!")
     private String tenPhong;
     @Positive(message = "Sai định dạng cột!")
+    @Max(value = 50, message = "Quá số lượng cột!")
     private Long cot;
     @Positive(message = "Sai định dạng hàng!")
+    @Max(value = 50, message = "Quá số lượng hàng!")
     private Long hang;
 
     public TaoPhongRequest() {

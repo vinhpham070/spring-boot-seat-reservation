@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/phong")
+@CrossOrigin(origins = "*")
 public class PhongController {
     PhongService phongService;
 

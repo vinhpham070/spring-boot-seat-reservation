@@ -13,4 +13,5 @@ public interface ThanhVienPhongRepository extends JpaRepository<ThanhVienPhong, 
     boolean existsByPhongAndUserAndVaiTroIn(Phong phong, User user, List<VaiTro> vaiTro);
     boolean existsByPhongAndUserAndVaiTro(Phong phong, User user, VaiTro vaiTro);
     Optional<ThanhVienPhong> findByUserAndPhong(User user, Phong phong);
+    List<ThanhVienPhong> findAllByUserAndVaiTro(User user, VaiTro vaiTro);
 }
