@@ -1,81 +1,71 @@
-# 🎟️ Seat Booking System (Hệ Thống Quản Lý & Đặt Chỗ Ngồi)
+# 🎟️ Seat Booking Web Application
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Vite](https://img.shields.io/badge/Vite-646C9A?style=for-the-badge&logo=vite&logoColor=white)
-![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
-
-Ứng dụng web Fullstack hỗ trợ tạo phòng, quản lý sơ đồ ghế ma trận động (lên tới kích thước lớn 30x30 / 50x50), mô phỏng quy trình đặt chỗ theo thời gian thực với cơ chế giữ ghế có thời hạn và phân quyền đa tầng (Owner, Admin, Guest).
-
----
-
-## 📸 Demo Giao Diện
-
-- **Trang chủ & Quản lý phòng:** Danh sách phòng trực quan, thống kê nhanh số ghế trống, đang giữ và đã mua.
-- **Sơ đồ ma trận linh hoạt:** Tự động ngắt dòng và chia lưới bằng CSS Grid, hỗ trợ cuộn ngang độc lập cho các phòng quy mô hội trường/rạp chiếu phim.
-- **Dark Mode tối ưu:** Tối ưu hóa độ tương phản với phong cách Dark theme hiện đại, dot pattern nền và hiệu ứng phản hồi xúc giác UI.
-
----
-
-## ✨ Tính Năng Nổi Bật
-
-### 1. Phân quyền đa cấp bậc (RBAC)
-- **Guest / Thành viên:** 
-  - Xem sơ đồ ghế trực quan theo màu sắc trạng thái.
-  - Chọn ghế trống để bắt đầu phiên giữ chỗ (Hold Session) trong vòng **5 phút**.
-  - Xác nhận thanh toán/đặt chỗ hoặc chủ động hủy phiên giữ.
-  - Xem và quản lý các ghế thuộc sở hữu của chính mình (`GHE_CUA_TOI`).
-- **Owner (Chủ phòng):**
-  - Toàn quyền cấu hình tên phòng, kích thước ma trận ghế ($Hàng \times Cột$).
-  - Xem chi tiết danh tính người đang đặt (`tenNguoiDat`) trên từng ghế.
-  - Can thiệp hủy vé đã đặt của bất kỳ người dùng nào trong phòng.
-  - Đặt vé hộ người khác kèm ghi chú chi tiết.
-  - Cấp/Hạ quyền quản trị viên (`Admin`) hoặc khách (`Guest`).
-
-### 2. Xử lý Trạng thái & Nghiệp vụ ghế phức tạp
-- **Hệ thống trạng thái 4 màu:**
-  - 🟢 **Trống (Available):** Ghế sẵn sàng để chọn.
-  - 🟡 **Đang giữ (Held):** Ghế đang nằm trong phiên giao dịch của một người dùng (hết hạn sau 300s).
-  - 🔴 **Đã mua (Booked):** Ghế đã xác nhận đặt thành công.
-  - 🟣 **Của bạn (User-owned):** Ghế bạn đang giữ hoặc đã sở hữu.
-- **Đồng hồ đếm ngược phiên (Countdown Timer):** Cảnh báo trực tiếp trên UI khi phiên giữ chỗ sắp hết hạn.
-
-### 3. Trải nghiệm người dùng (UX) & Kỹ thuật Frontend
-- **Debounced Validation:** Tự động kiểm tra tính hợp lệ của dữ liệu (Email, độ dài Password) khi người dùng ngừng gõ $0.5s$, giảm tải logic thừa và báo lỗi trực tiếp dưới input.
-- **Bắt lỗi RESTful toàn diện:** Tích hợp `GlobalExceptionHandler` phía Spring Boot để hiển thị chính xác lỗi nghiệp vụ (trùng username, sai định dạng, xung đột dữ liệu).
-- **History Drawer:** Sidebar trượt mượt mà với hiệu ứng làm mờ nền (Overlay), lưu trữ lịch sử các phòng đã truy cập gần đây qua `localStorage`.
+Ứng dụng web Fullstack phục vụ khởi tạo phòng họp/hội trường, quản lý và đặt chỗ ngồi dạng ma trận động. Hệ thống xử lý luồng đặt chỗ có thời hạn (Hold Session), phân quyền người dùng (Owner/Admin/Guest) và tối ưu hiển thị sơ đồ kích thước lớn trên giao diện web.
 
 ---
 
 ## 🛠️ Công Nghệ Sử Dụng
 
-### Backend
-- **Ngôn ngữ:** Java 17+
-- **Framework:** Spring Boot 3.x (Spring MVC, Spring Data JPA, Spring Security)
-- **Database:** MySQL / PostgreSQL
-- **Xử lý ngoại lệ:** `@RestControllerAdvice`, Global Validation (`jakarta.validation`)
+- **Backend:** Java 17, Spring Boot 3.x (Spring Data JPA, Spring Security, Hibernate, MySQL, Bean Validation).
+- **Frontend:** React 18, Vite, React Router DOM (v6), React Context API (`AuthContext`), CSS Grid & Flexbox (Dark Mode).
 
-### Frontend
-- **Thư viện chính:** React 18
-- **Build tool:** Vite
-- **Định tuyến:** React Router DOM (v6)
-- **Quản lý trạng thái:** React Context API (`AuthProvider`)
-- **Tạo kiểu:** Custom CSS Grid & Flexbox (Responsive, Smooth scrolling)
+---
+
+## 📋 Nghiệp Vụ & Tính Năng Chi Tiết
+
+- **Phân quyền & Vai trò người dùng (RBAC):**
+  - **Guest / Thành viên:** Nhập ID/URL để vào phòng; chọn ghế trống để kích hoạt phiên giữ chỗ trong **300 giây**; xác nhận đặt vé chính thức hoặc hủy giữ trước hạn; tra cứu và hủy vé do chính mình sở hữu (`GHE_CUA_TOI`).
+  - **Owner (Chủ phòng):** Khởi tạo phòng với ma trận tùy biến (tối đa $50 \times 50$); xem trực quan tên người đặt (`tenNguoiDat`) trên từng ô ghế; can thiệp hủy vé của bất kỳ ai trong phòng; đặt vé hộ cho một `username` cụ thể kèm ghi chú; cấp quyền `Admin` hoặc hạ cấp xuống `Guest`.
+- **Vòng đời & Trạng thái ghế:**
+  - `TRONG` (Xanh lá): Ghế khả dụng cho mọi người dùng.
+  - `DANG_GIU` (Vàng): Ghế đang nằm trong phiên giao dịch tạm thời của người khác.
+  - `DA_DAT` (Đỏ): Ghế đã xác nhận đặt thành công.
+  - `GHE_CUA_TOI` / `PHIEN_CUA_TOI` (Tím): Ghế thuộc quyền sở hữu hoặc phiên giữ của tài khoản hiện tại.
+
+---
+
+## 💡 Điểm Nhấn Kỹ Thuật & Giải Pháp Thực Tế
+
+- **Xử lý hiển thị ma trận lớn ($30 \times 30$):** Thay vì dùng `justify-content: center` khiến trình duyệt cắt mép trái (mất dải ghế A1–A9) khi zoom/thu nhỏ màn hình, hệ thống kết hợp `text-align: center` ở container ngoài cùng với `display: inline-grid` và `overflow-x: auto`. Cơ chế này giữ sơ đồ luôn ở giữa khi phòng nhỏ và hỗ trợ cuộn ngang chuẩn xác từ cột đầu tiên khi phòng lớn tràn màn hình.
+- **Tối ưu Form Validation bằng Debounce (500ms):** Ứng dụng `useEffect` để kiểm tra format Email và độ dài Mật khẩu ngay khi người dùng ngừng gõ $0.5s$, hiển thị thông báo lỗi đỏ trực tiếp dưới ô input thay vì dùng pop-up `alert()` làm đứt đoạn trải nghiệm. Các lỗi từ Backend (như trùng Username) được gom từ `@RestControllerAdvice` và đồng bộ ngược về form.
+- **Phòng vệ cơ sở dữ liệu trước lỗi Batch Insert:** Do cơ chế khóa `@GeneratedValue(strategy = IDENTITY)` của JPA làm vô hiệu hóa Batch Insert của Hibernate khi tạo lượng lớn bản ghi ghế, hệ thống chặn kích thước phòng từ 2 lớp: Frontend giới hạn form tối đa $50 \times 50$, Backend thẩm định nghiêm ngặt bằng `@Max(50)` và `@Valid` tại tầng Controller để bảo vệ CPU và Connection Pool.
+
+---
+
+## 📡 Danh Sách REST API Endpoints
+
+| Nhóm nghiệp vụ | Phương thức | Endpoint | Payload / Params | Mô tả |
+| :--- | :--- | :--- | :--- | :--- |
+| **Tài Khoản** | `POST` | `/api/tai-khoan/tao-tai-khoan` | `{ username, email, password }` | Đăng ký tài khoản mới |
+| | `POST` | `/api/tai-khoan/dang-nhap` | `{ username, password }` | Đăng nhập hệ thống |
+| | `POST` | `/api/tai-khoan/dang-xuat` | _None_ | Đăng xuất, hủy cookie phiên |
+| **Phòng** | `POST` | `/api/phong/tao-phong` | `{ tenPhong, hang, cot }` | Tạo phòng mới (tối đa 50x50) |
+| | `GET` | `/api/phong/{phongId}/so-do` | Path: `phongId` | Lấy sơ đồ ghế và quyền truy cập |
+| | `GET` | `/api/phong/danh-sach-phong` | _None_ | Danh sách phòng kèm thống kê số ghế |
+| **Đặt Ghế** | `POST` | `/api/dat-ghe/giu-ghe` | `{ gheNgoiId }` | Giữ ghế tạm thời (300s) |
+| | `POST` | `/api/dat-ghe/huy-giu-ghe/{phienId}` | Path: `phienId` | Hủy phiên giữ ghế |
+| | `POST` | `/api/dat-ghe/xac-nhan-ghe/{phienId}` | Path: `phienId` | Xác nhận đặt ghế chính thức |
+| | `POST` | `/api/dat-ghe/huy-ghe/{phienId}` | Path: `phienId` | Hủy vé đã mua (chủ vé) |
+| **Quản Lý** | `POST` | `/api/quan-ly/dat-ghe` | `{ phongId, gheId, datHoUsername, ghiChu }` | Owner đặt vé hộ |
+| | `POST` | `/api/quan-ly/huy-ghe` | `{ phongId, gheId }` | Owner hủy vé bất kỳ |
+| | `POST` | `/api/quan-ly/phan-quyen/admin` | `{ phongId, username }` | Cấp quyền Admin phòng |
+| | `POST` | `/api/quan-ly/phan-quyen/guest` | `{ phongId, username }` | Hạ cấp quyền xuống Guest |
 
 ---
 
 ## 🚀 Hướng Dẫn Cài Đặt & Khởi Chạy
 
-### 1. Yêu cầu hệ thống
-- **JDK:** 17 trở lên
-- **Node.js:** 18.x trở lên & `npm`
-- **Database:** MySQL 8.x hoặc PostgreSQL
+Yêu cầu môi trường: **JDK 17+**, **Node.js 18+ & npm**, **MySQL 8.x**.
 
----
+```bash
+# 1. Khởi chạy Backend (Spring Boot)
+cd backend
+# Cập nhật thông tin MySQL tại src/main/resources/application.properties trước khi chạy
+mvn clean spring-boot:run
+# Backend chạy tại: http://localhost:8080
 
-### 2. Cấu hình Backend (Spring Boot)
-
-1. Di chuyển vào thư mục backend:
-   ```bash
-   cd backend
+# 2. Khởi chạy Frontend (React + Vite)
+cd ../frontend
+npm install
+npm run dev
+# Frontend chạy tại: http://localhost:5173
