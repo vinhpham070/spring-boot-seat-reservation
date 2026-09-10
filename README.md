@@ -1,17 +1,17 @@
-# 🎟️ Seat Booking Web Application
+#  Seat Booking Web Application
 
 Ứng dụng web Fullstack phục vụ khởi tạo phòng họp/hội trường, quản lý và đặt chỗ ngồi dạng ma trận động. Hệ thống xử lý luồng đặt chỗ có thời hạn (Hold Session), phân quyền người dùng (Owner/Admin/Guest) và tối ưu hiển thị sơ đồ kích thước lớn trên giao diện web.
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng
+##  Công Nghệ Sử Dụng
 
 - **Backend:** Java 17, Spring Boot 3.x (Spring Data JPA, Spring Security, Hibernate, MySQL, Bean Validation).
 - **Frontend:** React 18, Vite, React Router DOM (v6), React Context API (`AuthContext`), CSS Grid & Flexbox (Dark Mode).
 
 ---
 
-## 📋 Nghiệp Vụ & Tính Năng Chi Tiết
+##  Nghiệp Vụ & Tính Năng Chi Tiết
 
 - **Phân quyền & Vai trò người dùng (RBAC):**
   - **Guest / Thành viên:** Nhập ID/URL để vào phòng; chọn ghế trống để kích hoạt phiên giữ chỗ trong **300 giây**; xác nhận đặt vé chính thức hoặc hủy giữ trước hạn; tra cứu và hủy vé do chính mình sở hữu (`GHE_CUA_TOI`).
@@ -24,7 +24,7 @@
 
 ---
 
-## 💡 Điểm Nhấn Kỹ Thuật & Giải Pháp Thực Tế
+##  Điểm Nhấn Kỹ Thuật & Giải Pháp Thực Tế
 
 - **Xử lý hiển thị ma trận lớn ($30 \times 30$):** Thay vì dùng `justify-content: center` khiến trình duyệt cắt mép trái (mất dải ghế A1–A9) khi zoom/thu nhỏ màn hình, hệ thống kết hợp `text-align: center` ở container ngoài cùng với `display: inline-grid` và `overflow-x: auto`. Cơ chế này giữ sơ đồ luôn ở giữa khi phòng nhỏ và hỗ trợ cuộn ngang chuẩn xác từ cột đầu tiên khi phòng lớn tràn màn hình.
 - **Tối ưu Form Validation bằng Debounce (500ms):** Ứng dụng `useEffect` để kiểm tra format Email và độ dài Mật khẩu ngay khi người dùng ngừng gõ $0.5s$, hiển thị thông báo lỗi đỏ trực tiếp dưới ô input thay vì dùng pop-up `alert()` làm đứt đoạn trải nghiệm. Các lỗi từ Backend (như trùng Username) được gom từ `@RestControllerAdvice` và đồng bộ ngược về form.
@@ -32,7 +32,7 @@
 
 ---
 
-## 📡 Danh Sách REST API Endpoints
+##  Danh Sách REST API Endpoints
 
 | Nhóm nghiệp vụ | Phương thức | Endpoint | Payload / Params | Mô tả |
 | :--- | :--- | :--- | :--- | :--- |
@@ -53,7 +53,7 @@
 
 ---
 
-## 🚀 Hướng Dẫn Cài Đặt & Khởi Chạy
+##  Hướng Dẫn Cài Đặt & Khởi Chạy
 
 Yêu cầu môi trường: **JDK 17+**, **Node.js 18+ & npm**, **MySQL 8.x**.
 
